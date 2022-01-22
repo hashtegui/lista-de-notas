@@ -4,15 +4,23 @@ import ListaDeNotas from "./components/ListaDeNotas/index.js"
 
 class App extends Component {
   
+  constructor(props){
+    super(props);
+    this.notas = [];
+  }
+
+
   criarNota(titulo, texto){
-    console.log(`uma nova nota foi criada `+titulo+`,`+texto);
+    const novaNota = {titulo, texto};
+    this.notas.push(novaNota);
+    console.log(this.notas.length)
   }
   
   render() {
     return (
       <section className='conteudo'>
-        <FormularioCadastro criarNota={this.criarNota}/>
-        <ListaDeNotas />
+        <FormularioCadastro criarNota={this.criarNota.bind(this)}/>
+        <ListaDeNotas notas={this.notas}/>
       </section>
     );
   }
